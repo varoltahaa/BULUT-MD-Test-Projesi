@@ -1,0 +1,40 @@
+include head
+script(defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous")
+script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous") 
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous")
+body
+        div.wrapper
+
+
+include ./include/navbar         
+
+
+section.main-container
+    div#home.location 
+            h1#home.text-white #{title}
+
+    div.form-group.row
+            div.col-sm-8
+                form(action="/search" method="GET")
+                    div(style="margin-top:10px; margin-bottom:10px;")
+                        input(type="text" style="border-color:black; color:white" name="name" placeholder="Film/Dizi/Oyuncu Ara")#name.form-control.bg-dark
+            div.col-sm-4(style="margin-top:10px; margin-bottom:10px;")
+                    button.btn.btn-secondary.dropdown-toggle( type="button" data-bs-toggle="dropdown" aria-haspopup="true" style="width: 460px" aria-expanded="false") Sırala
+                    div.dropdown-menu(aria-labelledby="dropdownMenuButton" )
+                        form(action="/getDropdown" method="GET") 
+                            a.dropdown-item( type="submit" action="/postDropdown" name="newest" method="GET")  Yeniye Göre Sırala
+                            a.dropdown-item(type="submit" action="/postDropdown" name="oldest" method="GET")  Eskiye Göre Sırala
+                            a.dropdown-item(type="submit" action="/postDropdown" name="date" method="GET")  Puana Göre Sırala
+                            a.dropdown-item( type="submit" action="/postDropdown" name="date" method="GET")  Rastgele Sırala
+            div.box#cart
+                    each movies in movie
+                        if !name || movies.name.toLowerCase().includes(name.toLowerCase())
+                        div.card.card.text-white.bg-black
+                            img(src=`${movies.image}`)
+                            div.card-body.bg.dark
+                                h5.card-title #{movies.name}
+                                a(href=`/movie/${movies.id}`).btn.btn-outline-light Details
+
+
+include ./include/footer
+

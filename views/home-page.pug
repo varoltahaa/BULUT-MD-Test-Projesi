@@ -1,0 +1,23 @@
+include head
+script(defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous")
+script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous") 
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous")
+body
+        div.wrapper
+
+
+include ./include/navbar   
+
+section.main-container
+    div(id="home").location 
+        h1#home.text-white Categories
+            div.box(style="margin-top:15px;")     
+                each categories in category
+                    div.card.card.text-white.bg-black
+                        img(src=`${categories.image}`)
+                        div.card-body.bg.dark
+                            h5.card-title #{categories.name}
+                            a(href=`/category/${categories.id}`).btn.btn-outline-light Details
+
+include ./include/footer
+
